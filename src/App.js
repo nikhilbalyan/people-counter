@@ -1,17 +1,35 @@
 import React, {Component} from 'react';
 
+const API = "http://suraksha-mitra-crowd-management.us-e1.cloudhub.io/countPeople"
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state =  {
+      hits : []
+    };
+  }
+
+  componentDidMount() {
+    fetch(API)
+    .then(response => response.json())
+    .then(data => this.setState({ hits: data.hits }));
+  }
+
   render() {
+    const { hits } = this.state;
+ 
     return (
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Steve Jobs</h5>
-          <h6 class="card-subtitle mb-2 text-muted">steve@apple.com</h6>
-          <p class="card-text">Stay Hungry, Stay Foolish</p>
-        </div>
+      <div>
+      <h1>
+        count
+      </h1>
+      <h2>
+        hits.count
+      </h2>
       </div>
     );
   }
+
 }
 
 export default App;
